@@ -1,0 +1,57 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "es6": true,
+    "node": true,
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:import/typescript"
+  ],
+  // Following will be specified by plugin:@typescript-eslint above
+  // "plugins": ["@typescript-eslint"],
+  "settings": {
+    // Settings for eslint-plugin-import resolver
+    "import/resolver": {
+      // Settings for eslint-import-resolver-typescript to resolve TypeScript path mapping.
+      "typescript": {},
+    },
+  },
+  "parserOptions": {
+    // Following parserOptions specified by airbnb-base
+    // "ecmaVersion": 2018,
+    // "sourceType": "module",
+    // Options for @typescript-eslint/eslint-plugin
+    // "project": "./tsconfig.json",
+  },
+  "rules": {
+    // Restore `airbnb` rules overridden by `typescript-eslint/recommended` ruleset.
+    "@typescript-eslint/camelcase": ["error", { "properties": "never", "ignoreDestructuring": false }],
+    "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions", "functions", "methods"] }],
+    "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }],
+    "@typescript-eslint/no-use-before-define": ["error", { "functions": true, "classes": true, "variables": true }],
+    "@typescript-eslint/require-await": ["off"],
+    "prefer-const": ["error", { "destructuring": "any", "ignoreReadBeforeAssign": true }],
+    
+    // Optional: Replace remaining `airbnb` rules by `typescript-eslint` equivalent if available
+    // "no-useless-constructor": "off",
+    // "@typescript-eslint/no-useless-constructor": "warn",
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "extends": [
+      ],
+      "rules": {
+        // Turn off rules where tsc does a better job or has issues with TypeScript files.
+        
+        // TypeScript's `noFallthroughCasesInSwitch` option is more robust
+        // See https://github.com/facebook/create-react-app/issues/6906
+        "default-case": "off",
+      }
+    }
+  ]
+}
