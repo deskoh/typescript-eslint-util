@@ -10,18 +10,26 @@
     "type": "git",
     "url": "git+https://github.com/deskoh/typescript-eslint-util.git"
   },
-  "keywords": ["eslint", "@typescript-eslint"],
+  "keywords": [
+    "eslint",
+    "@typescript-eslint"
+  ],
   "author": "deskoh",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "chalk": "^2.4.2",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
     "typescript": "^3.6.3"
   }

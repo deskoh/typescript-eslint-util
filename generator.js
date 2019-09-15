@@ -1,6 +1,7 @@
 const assert = require('assert')
 const chalk = require('chalk')
 const isEqual = require('lodash.isequal')
+const cloneDeep = require('lodash.clonedeep');
 const tsEslintPlugin = require('@typescript-eslint/eslint-plugin')
 const { loadConfigForFile } = require('./loader')
 
@@ -18,7 +19,7 @@ function generate(eslintConfig, options) {
 
   const { rules: eslintRules } = loadConfigForFile(eslintConfig, 'test.js')
 
-  const desiredRules = JSON.parse(JSON.stringify(eslintRules))
+  const desiredRules = cloneDeep(eslintRules)
 
   if (mergedOptions.extendsTypescriptEslintRecommended) {
     extendsTypescriptEslintRecommended(eslintRules, desiredRules)

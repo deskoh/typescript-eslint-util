@@ -65,9 +65,4 @@ validate(desiredRules, './config/custom.eslintrc')
 // Missing rules:
 // Extraneous rules:
 // Different rules:
-//   import/no-cycle
-//     Expected:
-//       [ 'error', { maxDepth: null } ]
-//     Actual:
-//       [ 'error', { maxDepth: Infinity } ]
 ```
