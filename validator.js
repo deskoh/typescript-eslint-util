@@ -7,24 +7,24 @@ const isEqual = require('lodash.isequal')
 
 const { loadRulesForFile } = require('./loader')
 
-function validate(desiredRules, eslintConfig) {
-  const customRules = loadRulesForFile(eslintConfig, 'test.js')
+function validate(expectedRules, actualEslintConfig) {
+  const actualRules = loadRulesForFile(actualEslintConfig, 'test.js')
 
-  const desiredRulenames = Object.keys(desiredRules).sort()
-  const rulenames = Object.keys(customRules).sort()
+  const desiredRulenames = Object.keys(expectedRules).sort()
+  const rulenames = Object.keys(actualRules).sort()
   
   console.log('Missing rules: ')
   desiredRulenames.forEach(rule => {
-    if (customRules[rule] === undefined) {
+    if (actualRules[rule] === undefined) {
       console.log(' ', rule)
     }
   })
   
   console.log('Extraneous rules: ')
   rulenames.forEach(rule => {
-    if (desiredRules[rule] === undefined && (
+    if (expectedRules[rule] === undefined && (
       // Ignore extraneous @typescript-eslint rules that has equivalent eslint rules turned off
-      !isEqual(desiredRules[rule.substring(rule.indexOf('/'))], ['off'])
+      !isEqual(expectedRules[rule.substring(rule.indexOf('/'))], ['off'])
     )) {
       console.log(' ', rule)
     }
@@ -32,16 +32,16 @@ function validate(desiredRules, eslintConfig) {
   
   console.log('Different rules:')
   rulenames.forEach(rule => {
-    if (desiredRules[rule] && (
-      !isEqual(desiredRules[rule], customRules[rule])
+    if (expectedRules[rule] && (
+      !isEqual(expectedRules[rule], actualRules[rule])
       // Check for @typescript-eslint equivalent rules
-      && !isEqual(desiredRules[rule], customRules[`@typescript-eslint/${rule}`])
+      && !isEqual(expectedRules[rule], actualRules[`@typescript-eslint/${rule}`])
     )) {
       // Due to eslint extends, some rules could be 'off', but with parameters
-      if (desiredRules[rule].includes('off') && customRules[rule].includes('off')) return
+      if (expectedRules[rule].includes('off') && actualRules[rule].includes('off')) return
       console.log(' ', rule)
-      console.log('    Expected:\n     ', util.inspect(desiredRules[rule], { colors: true }))
-      console.log('    Actual:\n     ', util.inspect(customRules[rule], { colors: true }))
+      console.log('    Expected:\n     ', util.inspect(expectedRules[rule], { colors: true }))
+      console.log('    Actual:\n     ', util.inspect(actualRules[rule], { colors: true }))
     }
   })
   

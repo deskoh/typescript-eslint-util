@@ -20,3 +20,12 @@ desiredRules = generate('./config/airbnb.eslintrc.js', {
 })
 
 validate(desiredRules, './config/custom-react.eslintrc')
+
+console.log('Validating airbnb-typescript/base against airbnb-base...')
+desiredRules = generate('./config/airbnb-base.eslintrc.js', {
+  extendsTypescriptEslintRecommended: false,
+  replaceTypescriptEslintEquivalents: true,
+  disableEslintRulesCheckedByTypescript: false,
+})
+
+validate(desiredRules, './config/airbnb-typescript-base.eslintrc.js')
